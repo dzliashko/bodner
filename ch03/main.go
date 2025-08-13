@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func task01() {
 	greetings := []string{"Hello", "Hola", "नमस्कार", "こんにちは", "Привет"}
@@ -10,6 +12,12 @@ func task01() {
 	fmt.Println(greetings[3:])
 }
 
+func task02() {
+	var message string = "Hi 👩 and 👨"
+	runes := []rune(message)
+	fmt.Println(string(runes[3]))
+}
+
 func main() {
-	task01()
+	task02()
 }
