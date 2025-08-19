@@ -13,6 +13,25 @@ func task01() []int {
 	return randomInts
 }
 
+func task02(randomInts []int) {
+	for _, v := range randomInts {
+		switch {
+		case v%2 == 0 && v%3 == 0:
+			fmt.Println("Шесть!")
+		case v%2 == 0:
+			fmt.Println("Два!")
+
+		case v%3 == 0:
+			fmt.Println("Три!")
+		default:
+			fmt.Println("Неважно")
+		}
+
+	}
+}
+
 func main() {
-	fmt.Println(task01())
+	randomInts := task01()
+	fmt.Println(randomInts)
+	task02(randomInts)
 }
