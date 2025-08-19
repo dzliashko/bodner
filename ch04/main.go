@@ -34,4 +34,10 @@ func main() {
 	randomInts := task01()
 	fmt.Println(randomInts)
 	task02(randomInts)
+	var total int
+	for i := 0; i <= 10; i++ {
+		total := total + i
+		fmt.Println(total)
+	}
+	fmt.Println(total)
 }
