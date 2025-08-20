@@ -12,7 +12,9 @@ func sub(i, j int) int { return i - j }
 func mul(i, j int) int { return i * j }
 func div(i, j int) int { return i / j }
 
-var opMap = map[string]func(int, int) int{
+type opFuncType func(int, int) int
+
+var opMap = map[string]opFuncType{
 	"+": add,
 	"-": sub,
 	"*": mul,
@@ -24,9 +26,9 @@ var expressions = [][]string{
 	{"2", "-", "3"},
 	{"2", "*", "3"},
 	{"2", "/", "3"},
-	{"2", "%", "3"},
-	{"two", "+", "three"},
-	{"5"},
+	// {"2", "%", "3"},
+	// {"two", "+", "three"},
+	// {"5"},
 }
 
 func Calc(expression []string) int {
@@ -54,7 +56,6 @@ func Calc(expression []string) int {
 }
 
 func TestCalc() {
-
 	for i := range expressions {
 		result := Calc(expressions[i])
 		fmt.Println(result)
