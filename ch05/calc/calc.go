@@ -1,70 +1,68 @@
 package calc
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 )
 
-// primitive calc
+func add(i int, j int) (int, error) { return i + j, nil }
 
-var (
-	add = func(i, j int) int { return i + j }
-	sub = func(i, j int) int { return i - j }
-	mul = func(i, j int) int { return i * j }
-	div = func(i, j int) int { return i / j }
-)
+func sub(i int, j int) (int, error) { return i - j, nil }
 
-// func add(i, j int) int { return i + j }
-// func sub(i, j int) int { return i - j }
-// func mul(i, j int) int { return i * j }
-// func div(i, j int) int { return i / j }
+func mul(i int, j int) (int, error) { return i * j, nil }
 
-type opFuncType func(int, int) int
+func div(i int, j int) (int, error) {
+	if j == 0 {
+		return 0, errors.New("division by zero")
+	}
+	return i / j, nil
+}
 
-var opMap = map[string]opFuncType{
+var opMap = map[string]func(int, int) (int, error){
 	"+": add,
 	"-": sub,
 	"*": mul,
 	"/": div,
 }
 
-var expressions = [][]string{
-	{"2", "+", "3"},
-	{"2", "-", "3"},
-	{"2", "*", "3"},
-	{"2", "/", "3"},
-	// {"2", "%", "3"},
-	// {"two", "+", "three"},
-	// {"5"},
-}
-
-func Calc(expression []string) int {
-	var result int
-
-	if len(expression) != 3 {
-		fmt.Println("invalid expression:", expression)
+func Calc() {
+	expressions := [][]string{
+		{"2", "+", "3"},
+		{"2", "-", "3"},
+		{"2", "*", "3"},
+		{"2", "/", "3"},
+		{"2", "%", "3"},
+		{"two", "+", "three"},
+		{"5"},
+		{"10", "/", "0"},
 	}
-	p1, err := strconv.Atoi(expression[0])
-	if err != nil {
-		fmt.Println(err)
-	}
-	op := expression[1]
-	opFunc, ok := opMap[op]
-	if !ok {
-		fmt.Println("unsupported operator:", op)
-	}
-	p2, err := strconv.Atoi(expression[2])
-	if err != nil {
-		fmt.Println(err)
-	}
-	result = opFunc(p1, p2)
-
-	return result
-}
-
-func TestCalc() {
-	for i := range expressions {
-		result := Calc(expressions[i])
+	for _, expression := range expressions {
+		if len(expression) != 3 {
+			fmt.Println("invalid expression:", expression)
+			continue
+		}
+		p1, err := strconv.Atoi(expression[0])
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		op := expression[1]
+		opFunc, ok := opMap[op]
+		if !ok {
+			fmt.Println("unsupported operator:", op)
+			continue
+		}
+		p2, err := strconv.Atoi(expression[2])
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		result, err := opFunc(p1, p2)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
 		fmt.Println(result)
 	}
 }
