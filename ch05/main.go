@@ -1,7 +1,15 @@
 package main
 
-import "ch05/calc"
+import (
+	"fmt"
+)
 
 func main() {
-	calc.TestCalc()
+
+	// anonymous function
+	for i := range 5 {
+		func(j int) {
+			fmt.Println("printing", j, "from inside of an anonymous function")
+		}(i)
+	}
 }
