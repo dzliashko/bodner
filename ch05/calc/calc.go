@@ -7,10 +7,17 @@ import (
 
 // primitive calc
 
-func add(i, j int) int { return i + j }
-func sub(i, j int) int { return i - j }
-func mul(i, j int) int { return i * j }
-func div(i, j int) int { return i / j }
+var (
+	add = func(i, j int) int { return i + j }
+	sub = func(i, j int) int { return i - j }
+	mul = func(i, j int) int { return i * j }
+	div = func(i, j int) int { return i / j }
+)
+
+// func add(i, j int) int { return i + j }
+// func sub(i, j int) int { return i - j }
+// func mul(i, j int) int { return i * j }
+// func div(i, j int) int { return i / j }
 
 type opFuncType func(int, int) int
 
