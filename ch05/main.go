@@ -1,15 +1,14 @@
 package main
 
 import (
+	"ch05/closures"
 	"fmt"
 )
 
 func main() {
-
-	// anonymous function
-	for i := range 5 {
-		func(j int) {
-			fmt.Println("printing", j, "from inside of an anonymous function")
-		}(i)
+	twoBase := closures.MakeMult(2)
+	threeBase := closures.MakeMult(3)
+	for i := 0; i < 3; i++ {
+		fmt.Println(twoBase(i), threeBase(i))
 	}
 }
